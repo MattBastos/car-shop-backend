@@ -1,7 +1,7 @@
 import ICar from '../../src/Interfaces/ICar';
-import CarRegistration from '../../src/Domains/CarRegistration';
+import Car from '../../src/Domains/Car';
 
-const carRegistrationInput: ICar = {
+const carInput: ICar = {
   model: 'Marea',
   year: 2002,
   color: 'Black',
@@ -11,7 +11,7 @@ const carRegistrationInput: ICar = {
   seatsQty: 5,
 };
 
-const carRegistrationOutput: CarRegistration = new CarRegistration(
+const carOutput: ICar = new Car(
   '6348513f34c397abcad040b2',
   'Marea',
   2002,
@@ -22,4 +22,7 @@ const carRegistrationOutput: CarRegistration = new CarRegistration(
   5,
 );
 
-export { carRegistrationInput, carRegistrationOutput };
+export {
+  carInput,
+  carOutput,
+};
