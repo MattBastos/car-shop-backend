@@ -17,7 +17,6 @@ export default class CarController {
     const { body } = this._req;
 
     const car: ICar = {
-      id: body.id,
       model: body.model,
       year: body.year,
       color: body.color,
