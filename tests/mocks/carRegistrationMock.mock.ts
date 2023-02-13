@@ -1,7 +1,7 @@
 import ICar from '../../src/Interfaces/ICar';
 import Car from '../../src/Domains/Car';
 
-const carInput: ICar = {
+const carInput = {
   model: 'Marea',
   year: 2002,
   color: 'Black',
@@ -22,7 +22,4 @@ const carOutput: ICar = new Car(
   5,
 );
 
-export {
-  carInput,
-  carOutput,
-};
+export { carInput, carOutput };
