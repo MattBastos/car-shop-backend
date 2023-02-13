@@ -3,6 +3,7 @@ import carRoutes from './Routes/carRoutes';
 
 const app = express();
 app.use(express.json());
-app.use(carRoutes);
+
+app.use('/cars', carRoutes);
 
 export default app;

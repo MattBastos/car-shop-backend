@@ -1,5 +1,5 @@
 interface ICar {
-  id?: string | undefined,
+  id?: string,
   model: string,
   year: number,
   color: string,
