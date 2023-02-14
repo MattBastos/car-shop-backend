@@ -21,4 +21,8 @@ export default class CarODM {
   public async create(car: ICar) {
     return this._model.create({ ...car });
   }
+
+  public async find() {
+    return this._model.find();
+  }
 }
