@@ -34,7 +34,14 @@ describe('Find all cars and find car by Id', function () {
     }
   });
 
-  it('Should return an exception if the id is invalid', function () {
+  it('Should return an exception if the id is invalid', async function () {
+    sinon.stub(Model, 'findById').resolves({});
 
+    try {
+      const carService = new CarService();
+      await carService.findById(1000);
+    } catch (err) {
+      expect((err as Error).message).to.be.equal('Invalid mongo id');
+    }
   });
 });
