@@ -23,6 +23,6 @@ export default class CarODM {
   }
 
   public async find() {
-    return this._model.find();
+    return this._model.find({});
   }
 }
