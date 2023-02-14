@@ -1,9 +1,11 @@
 import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarODM';
+import CarIdValidation from './validations/CarIdValidation';
 
 export default class CarService {
   private _model = new CarODM();
+  private _carIdValidation = new CarIdValidation();
 
   private createCarDomain(car: ICar | null): Car | null {
     if (!car) return null;
@@ -21,10 +23,10 @@ export default class CarService {
   }
 
   public async findById(id: string) {
-    const isValid = await this._model.idValidation(id);
     const data = await this._model.findById(id);
+    const isValid = this._carIdValidation.idValidation(id);
 
-    if (isValid === false) return { message: 'Invalid mongo id' };
+    if (isValid) return { message: isValid };
 
     if (!data) return { message: 'Car not found' };
 
