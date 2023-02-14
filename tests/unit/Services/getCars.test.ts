@@ -23,8 +23,15 @@ describe('Find all cars and find car by Id', function () {
     expect(result).to.be.deep.equal(car);
   });
 
-  it('Should return an exception if the car does not exist', function () {
+  it('Should return an exception if the car does not exist', async function () {
+    sinon.stub(Model, 'findById').resolves({});
 
+    try {
+      const carService = new CarService();
+      await carService.findById('634852326b35b59XXXXXX');
+    } catch (err) {
+      expect((err as Error).message).to.be.equal('Car not found');
+    }
   });
 
   it('Should return an exception if the id is invalid', function () {
