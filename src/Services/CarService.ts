@@ -3,20 +3,19 @@ import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarODM';
 
 export default class CarService {
-  private createCarDomain(car: ICar | null): Car | null {
-    if (!car) return null;
+  private _model = new CarODM();
+
+  private createCarDomain(car: ICar): Car {
     return new Car(car);
   }
 
-  public async create(car: ICar) {
-    const carODM = new CarODM();
-    const newCar = await carODM.create(car);
+  public async create(car: ICar): Promise<Car> {
+    const newCar = await this._model.create(car);
     return this.createCarDomain(newCar);
   }
 
-  public async find() {
-    const carODM = new CarODM();
-    const allCars = await carODM.find();
-    return allCars;
+  public async find(): Promise<Car[]> {
+    const allCars = await this._model.find();
+    return allCars.map((car) => this.createCarDomain(car));
   }
 }
