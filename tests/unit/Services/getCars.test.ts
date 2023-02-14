@@ -2,7 +2,8 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
 import CarService from '../../../src/Services/CarService';
-import { allCars, car } from '../../mocks/getCarsMock.mock';
+import allCars from '../../mocks/getCarsMock.mock';
+import { carOutput } from '../../mocks/carRegistrationMock.mock';
 
 describe('Find all cars and find car by Id', function () {
   it('Should return a list with all cars', async function () {
@@ -15,12 +16,12 @@ describe('Find all cars and find car by Id', function () {
   });
 
   it('Should return a car by Id', async function () {
-    sinon.stub(Model, 'findById').resolves(car);
+    sinon.stub(Model, 'findById').resolves(carOutput);
 
     const carService = new CarService();
-    const result = await carService.findById(car.id);
+    const result = await carService.findById('6348513f34c397abcad040b2');
 
-    expect(result).to.be.deep.equal(car);
+    expect(result).to.be.deep.equal(carOutput);
   });
 
   it('Should return an exception if the car does not exist', async function () {

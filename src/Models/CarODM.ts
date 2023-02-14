@@ -1,4 +1,4 @@
-import { Model, Schema, model, models } from 'mongoose';
+import { Model, Schema, model, models, isValidObjectId } from 'mongoose';
 import ICar from '../Interfaces/ICar';
 
 export default class CarODM {
@@ -28,5 +28,9 @@ export default class CarODM {
 
   public async findById(id: string) {
     return this._model.findById(id).exec();
+  }
+
+  public idValidation(id: string) {
+    return isValidObjectId(id);
   }
 }
