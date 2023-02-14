@@ -21,7 +21,14 @@ export default class CarService {
   }
 
   public async findById(id: string) {
-    const car = await this._model.findById(id);
-    return this.createCarDomain(car);
+    const isValid = await this._model.idValidation(id);
+    const data = await this._model.findById(id);
+
+    if (isValid === false) return { message: 'Invalid mongo id' };
+
+    if (!data) return { message: 'Car not found' };
+
+    const car = this.createCarDomain(data);
+    return { message: car };
   }
 }

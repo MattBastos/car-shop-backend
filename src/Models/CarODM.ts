@@ -27,10 +27,10 @@ export default class CarODM {
   }
 
   public async findById(id: string) {
-    return this._model.findById(id).exec();
+    return this._model.findById(id);
   }
 
-  public idValidation(id: string) {
+  public async idValidation(id: string) {
     return isValidObjectId(id);
   }
 }
