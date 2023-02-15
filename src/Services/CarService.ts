@@ -37,8 +37,6 @@ export default class CarService {
     const findCar = await this._model.findById(id);
     if (!findCar) return { message: 'Car not found' };
 
-    const data = await this._model.findByIdAndUpdate(id, carData);
-    const car = this.createCarDomain(data);
-    return { message: car };
+    await this._model.findByIdAndUpdate(id, carData);
   }
 }

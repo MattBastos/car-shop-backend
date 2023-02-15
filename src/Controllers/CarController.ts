@@ -49,7 +49,8 @@ export default class CarController {
   public async findByIdAndUpdate() {
     const { id } = this._req.params;
     const { body } = this._req;
-    const { message } = await this._service.findByIdAndUpdate(id, body);
+    await this._service.findByIdAndUpdate(id, body);
+    const { message } = await this._service.findById(id);
 
     if (message === 'Car not found') return this._res.status(404).json({ message });
 
