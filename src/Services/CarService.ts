@@ -1,10 +1,11 @@
-import { isValidObjectId } from 'mongoose';
 import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarODM';
+import CarDataValidation from './validations/CarDataValidation';
 
 export default class CarService {
   private _model = new CarODM();
+  private _carDataValidation = new CarDataValidation();
 
   private createCarDomain(car: ICar | null): Car | null {
     if (!car) return null;
@@ -22,21 +23,31 @@ export default class CarService {
   }
 
   public async findById(id: string) {
-    if (!isValidObjectId(id)) return { message: 'Invalid mongo id' };
+    if (this._carDataValidation.validateMongooseId(id)) {
+      return { message: 'Invalid mongo id' };
+    }
+
+    if (await this._carDataValidation.verifyIdDB(id)) {
+      return { message: 'Car not found' };
+    }
 
     const data = await this._model.findById(id);
-    if (!data) return { message: 'Car not found' };
-
     const car = this.createCarDomain(data);
     return { message: car };
   }
 
   public async findByIdAndUpdate(id: string, carData: ICar) {
-    if (!isValidObjectId(id)) return { message: 'Invalid mongo id' };
+    if (this._carDataValidation.validateMongooseId(id)) {
+      return { message: 'Invalid mongo id' };
+    }
 
-    const findCar = await this._model.findById(id);
-    if (!findCar) return { message: 'Car not found' };
+    if (await this._carDataValidation.verifyIdDB(id)) {
+      return { message: 'Car not found' };
+    }
 
     await this._model.findByIdAndUpdate(id, carData);
+    const data = await this._model.findById(id);
+    const car = this.createCarDomain(data);
+    return { message: car };
   }
 }
