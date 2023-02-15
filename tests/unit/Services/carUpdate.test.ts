@@ -10,7 +10,12 @@ describe('Update car by id', function () {
   });
 
   it('Should update a car successfully and return its data', async function () {
-  
+    sinon.stub(Model, 'findByIdAndUpdate').resolves(carUpdateOutput);
+
+    const carService = new CarService();
+    const result = carService.findByIdAndUpdate('634852326b35b59438fbea2f', carUpdateInput);
+
+    expect(result).to.be.deep.equal(carUpdateOutput);
   });
 
   it('Should return an exception if the car does not exists', async function () {
@@ -25,6 +30,13 @@ describe('Update car by id', function () {
   });
 
   it('Should return an exception if the id is invalid', async function () {
+    sinon.stub(Model, 'findByIdAndUpdate').resolves();
 
+    try {
+      const carService = new CarService();
+      await carService.findByIdAndUpdate('invalidMongoId');
+    } catch (err) {
+      expect((err as Error).message).to.be.equal({ message: 'Invalid mongo id' });
+    }
   });
 });
