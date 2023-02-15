@@ -45,4 +45,16 @@ export default class CarController {
 
     return this._res.status(200).json(message);
   }
+
+  public async findByIdAndUpdate() {
+    const { id } = this._req.params;
+    const { body } = this._req;
+    const { message } = await this._service.findByIdAndUpdate(id, body);
+
+    if (message === 'Car not found') return this._res.status(404).json({ message });
+
+    if (message === 'Invalid mongo id') return this._res.status(422).json({ message });
+
+    return this._res.status(200).json(message);
+  }
 }
