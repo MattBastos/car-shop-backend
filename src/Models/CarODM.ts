@@ -29,4 +29,8 @@ export default class CarODM {
   public async findById(id: string) {
     return this._model.findById(id);
   }
+
+  public async findByIdAndUpdate(id: string, car: ICar) {
+    return this._model.findByIdAndUpdate(id, car);
+  }
 }
