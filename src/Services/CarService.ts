@@ -23,13 +23,8 @@ export default class CarService {
   }
 
   public async findById(id: string) {
-    if (this._carDataValidation.validateMongooseId(id)) {
-      return { message: 'Invalid mongo id' };
-    }
-
-    if (await this._carDataValidation.verifyIdDB(id)) {
-      return { message: 'Car not found' };
-    }
+    const { message } = await this._carDataValidation.validateId(id);
+    if (message) return { message };
 
     const data = await this._model.findById(id);
     const car = this.createCarDomain(data);
@@ -37,13 +32,8 @@ export default class CarService {
   }
 
   public async findByIdAndUpdate(id: string, carData: ICar) {
-    if (this._carDataValidation.validateMongooseId(id)) {
-      return { message: 'Invalid mongo id' };
-    }
-
-    if (await this._carDataValidation.verifyIdDB(id)) {
-      return { message: 'Car not found' };
-    }
+    const { message } = await this._carDataValidation.validateId(id);
+    if (message) return { message };
 
     await this._model.findByIdAndUpdate(id, carData);
     const data = await this._model.findById(id);
