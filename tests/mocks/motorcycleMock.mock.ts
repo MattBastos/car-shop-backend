@@ -1,8 +1,33 @@
 import IMotorcycle from '../../src/Interfaces/IMotorcycle';
 import Motorcycle from '../../src/Domains/Motorcycle';
 
+const HORNET = 'Honda Cb 600f Hornet';
+
+const allMotorcycles: IMotorcycle[] = [
+  {
+    id: '634852326b35b59438fbea2f',
+    model: HORNET,
+    year: 2005,
+    color: 'Yellow',
+    status: true,
+    buyValue: 30.000,
+    category: 'Street',
+    engineCapacity: 600,
+  },
+  {
+    id: '634852326b35b59438fbea31',
+    model: 'Honda Cbr 1000rr',
+    year: 2011,
+    color: 'Orange',
+    status: true,
+    buyValue: 59.900,
+    category: 'Street',
+    engineCapacity: 1000,
+  },
+];
+
 const motorcycleRegistrationInput: IMotorcycle = { 
-  model: 'Honda Cb 600f Hornet',
+  model: HORNET,
   year: 2005,
   color: 'Yellow',
   status: true,
@@ -13,7 +38,7 @@ const motorcycleRegistrationInput: IMotorcycle = {
 
 const motorcycleRegistrationOutputData: IMotorcycle = {
   id: '6348513f34c397abcad040b2',
-  model: 'Honda Cb 600f Hornet',
+  model: HORNET,
   year: 2005,
   color: 'Yellow',
   status: true,
@@ -25,6 +50,7 @@ const motorcycleRegistrationOutputData: IMotorcycle = {
 const motorcycleRegistrationOutput: Motorcycle = new Motorcycle(motorcycleRegistrationOutputData);
 
 export {
+  allMotorcycles,
   motorcycleRegistrationInput,
   motorcycleRegistrationOutput,
 };
