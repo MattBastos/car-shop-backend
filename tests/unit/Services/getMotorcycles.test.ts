@@ -1,0 +1,28 @@
+import { expect } from 'chai';
+import sinon from 'sinon';
+import { Model } from 'mongoose';
+import MotorcycleService from '../../../src/Services/MotorcycleService';
+import { allMotorcycles, motorcycleRegistrationOutput } from '../../mocks/motorcycleMock.mock';
+
+describe('Find all motorcycles and find motorcycle by Id', function () {
+  it('Should return a list with all motorcycles', async function () {
+    sinon.stub(Model, 'find').resolves(allMotorcycles);
+
+    const motorcycleService = new MotorcycleService();
+    const result = await motorcycleService.find();
+
+    expect(result).to.be.deep.equal(allMotorcycles);
+  });
+
+  it('Should return a motorcycle by Id', async function () {
+
+  });
+
+  it('Should return an exception if the motorcycle does not exists', async function () {
+
+  });
+
+  it('Should return an exception if the id is invalid', async function () {
+
+  });
+});
