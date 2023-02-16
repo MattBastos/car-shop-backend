@@ -20,11 +20,18 @@ describe('Find all motorcycles and find motorcycle by Id', function () {
     const motorcycleService = new MotorcycleService();
     const result = await motorcycleService.findById('6348513f34c397abcad040b2');
 
-    expect(result).to.be.deep.equal(motorcycleRegistrationOutput);
+    expect(result).to.be.deep.equal({ message: motorcycleRegistrationOutput });
   });
 
   it('Should return an exception if the motorcycle does not exists', async function () {
+    sinon.stub(Model, 'findById').resolves();
 
+    try {
+      const motorcycleService = new MotorcycleService();
+      const result = await motorcycleService.findById('6348513f34c397abXXXXX');
+    } catch (err) {
+      expect((err as Error).message).to.be.equal({ message: 'Motorcycle not found' });
+    }
   });
 
   it('Should return an exception if the id is invalid', async function () {
