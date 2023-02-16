@@ -35,6 +35,13 @@ describe('Find all motorcycles and find motorcycle by Id', function () {
   });
 
   it('Should return an exception if the id is invalid', async function () {
+    sinon.stub(Model, 'findById').resolves();
 
+    try {
+      const motorcycleService = new MotorcycleService();
+      const result = await motorcycleService.findById('invalidMongoId');
+    } catch (err) {
+      expect((err as Error).message).to.be.equal({ message: 'Invalid mongo id' });
+    }
   });
 });
