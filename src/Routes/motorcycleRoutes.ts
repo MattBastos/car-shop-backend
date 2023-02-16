@@ -5,5 +5,6 @@ const motorcycleRoutes = Router();
 
 motorcycleRoutes.post('/', (req, res) => new MotorcycleController(req, res).create());
 motorcycleRoutes.get('/', (req, res) => new MotorcycleController(req, res).find());
+motorcycleRoutes.get('/:id', (req, res) => new MotorcycleController(req, res).findById());
 
 export default motorcycleRoutes;
