@@ -14,4 +14,10 @@ export default class MotorcycleService {
     const newMotorcycle = await this._model.create(motorcycle);
     return this.createMotorcycleDomain(newMotorcycle);
   }
+
+  public async find() {
+    const allMotorcycles = await this._model.find();
+    return allMotorcycles.map((motorcycle) =>
+      this.createMotorcycleDomain(motorcycle));
+  }
 }
