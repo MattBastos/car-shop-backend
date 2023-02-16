@@ -1,9 +1,11 @@
 import Motorcycle from '../Domains/Motorcycle';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 import MotorcycleODM from '../Models/MotorcycleODM';
+import MotorcycleDataValidation from './validations/MotorcycleDataValidation';
 
 export default class MotorcycleService {
   private _model = new MotorcycleODM();
+  private _motorcycleDataValidation = new MotorcycleDataValidation();
   
   private createMotorcycleDomain(motorcycle: IMotorcycle | null): Motorcycle | null {
     if (!motorcycle) return null;
@@ -19,5 +21,14 @@ export default class MotorcycleService {
     const allMotorcycles = await this._model.find();
     return allMotorcycles.map((motorcycle) =>
       this.createMotorcycleDomain(motorcycle));
+  }
+
+  public async findById(id: string) {
+    const { message } = await this._motorcycleDataValidation.validateId(id);
+    if (message) return message;
+
+    const data = await this._model.findById(id);
+    const motorcycle = this.createMotorcycleDomain(data);
+    return { message: motorcycle };
   }
 }
