@@ -15,7 +15,12 @@ describe('Find all motorcycles and find motorcycle by Id', function () {
   });
 
   it('Should return a motorcycle by Id', async function () {
+    sinon.stub(Model, 'findById').resolves(motorcycleRegistrationOutput);
 
+    const motorcycleService = new MotorcycleService();
+    const result = await motorcycleService.findById('6348513f34c397abcad040b2');
+
+    expect(result).to.be.deep.equal(motorcycleRegistrationOutput);
   });
 
   it('Should return an exception if the motorcycle does not exists', async function () {
