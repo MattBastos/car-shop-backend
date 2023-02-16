@@ -25,7 +25,7 @@ export default class MotorcycleService {
 
   public async findById(id: string) {
     const { message } = await this._motorcycleDataValidation.validateId(id);
-    if (message) return message;
+    if (message) return { message };
 
     const data = await this._model.findById(id);
     const motorcycle = this.createMotorcycleDomain(data);
