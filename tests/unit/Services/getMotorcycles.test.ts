@@ -28,7 +28,7 @@ describe('Find all motorcycles and find motorcycle by Id', function () {
 
     try {
       const motorcycleService = new MotorcycleService();
-      const result = await motorcycleService.findById('6348513f34c397abXXXXX');
+      await motorcycleService.findById('6348513f34c397abXXXXX');
     } catch (err) {
       expect((err as Error).message).to.be.equal({ message: 'Motorcycle not found' });
     }
@@ -39,7 +39,7 @@ describe('Find all motorcycles and find motorcycle by Id', function () {
 
     try {
       const motorcycleService = new MotorcycleService();
-      const result = await motorcycleService.findById('invalidMongoId');
+      await motorcycleService.findById('invalidMongoId');
     } catch (err) {
       expect((err as Error).message).to.be.equal({ message: 'Invalid mongo id' });
     }
