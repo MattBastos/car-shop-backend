@@ -14,12 +14,12 @@ describe('Update motorcycle by id', function () {
     sinon.stub(Model, 'findById').resolves(motorcycleUpdateOutput);
 
     const motorcycleService = new MotorcycleService();
-    const result = motorcycleService.findByIdAndUpdate(
+    const result = await motorcycleService.findByIdAndUpdate(
       '634852326b35b59438fbea2f',
       motorcycleUpdateInput,
     );
 
-    expect(result).to.be.deep.equal(motorcycleUpdateOutput);
+    expect(result).to.be.deep.equal({ message: motorcycleUpdateOutput });
   });
 
   it('Should return an exception if the motorcycle does not exists', async function () {
