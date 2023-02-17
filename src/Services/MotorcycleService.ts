@@ -31,4 +31,14 @@ export default class MotorcycleService {
     const motorcycle = this.createMotorcycleDomain(data);
     return { message: motorcycle };
   }
+
+  public async findByIdAndUpdate(id: string, motorcycleData: IMotorcycle) {
+    const { message } = await this._motorcycleDataValidation.validateId(id);
+    if (message) return { message };
+
+    await this._model.findByIdAndUpdate(id, motorcycleData);
+    const data = await this._model.findById(id);
+    const motorcycle = this.createMotorcycleDomain(data);
+    return { message: motorcycle };
+  }
 }
