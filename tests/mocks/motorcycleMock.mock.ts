@@ -49,8 +49,31 @@ const motorcycleRegistrationOutputData: IMotorcycle = {
 
 const motorcycleRegistrationOutput: Motorcycle = new Motorcycle(motorcycleRegistrationOutputData);
 
+const motorcycleUpdateInput: IMotorcycle = {
+  model: HORNET,
+  year: 2014,
+  color: 'Red',
+  status: true,
+  buyValue: 45.000,
+  category: 'Street',
+  engineCapacity: 600,
+};
+
+const motorcycleUpdateOutput: IMotorcycle = {
+  id: '634852326b35b59438fbea2f',
+  model: HORNET,
+  year: 2014,
+  color: 'Red',
+  status: true,
+  buyValue: 45.000,
+  category: 'Street',
+  engineCapacity: 600,
+};
+
 export {
   allMotorcycles,
   motorcycleRegistrationInput,
   motorcycleRegistrationOutput,
+  motorcycleUpdateInput,
+  motorcycleUpdateOutput,
 };
