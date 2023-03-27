@@ -1,13 +1,74 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Car Shop
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+- A Back-end project developed to manage cars and motorcycles of a shop.
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+- The project was developed in Typescript with MongoDB/Mongoose using BDD(Behavior Driven Development).
+
+## Stacks and Tools
+
+- Typescript
+- Node
+- MongoDB
+- Mongoose
+- Docker
+- Jest
+- BDD
+- VsCode
+- Trello
+- Git & Github
+- Linux - Ubuntu
+
+## Running Locally
+
+Clone the project:
+
+```bash
+  git@github.com:MattBastos/car-shop.git
+```
+
+Enter the project directory:
+
+```bash
+  cd car-shop
+```
+
+## Using Docker
+
+Run the node service with the command:
+
+```bash
+  docker-compose up -d
+```
+
+These services will initialize a container called car_shop and another called car_shop_db.
+From here you can run the car_shop container via CLI or open it in VS Code.
+
+Use the command:
+
+```bash
+  docker exec -it trybers_and_dragons bash
+```
+
+It will give you access to the interactive terminal of the container created by compose, which is running in the background.
+
+Install dependencies:
+
+```bash
+  npm install
+```
+
+If you don't want to use docker, just install the dependencies with **npm install**.
+
+Start the Project:
+
+```bash
+  npm start
+```
+## Autores
+
+- [@MattBastos](https://www.github.com/MattBastos)
+
+
+## Reference
+
+ - [Trybe](https://www.betrybe.com/)
