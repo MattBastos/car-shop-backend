@@ -1,8 +1,6 @@
 # Car Shop
 
-- A Back-end project developed to manage cars and motorcycles of a shop.
-
-- The project was developed in Typescript with MongoDB/Mongoose using BDD(Behavior Driven Development).
+- For this project, i applied Object Oriented Programming (OOP) principles to build a CRUD API to manage a concessionary. This was done using the MongoDB database through the Mongoose framework.
 
 ## Stacks and Tools
 
