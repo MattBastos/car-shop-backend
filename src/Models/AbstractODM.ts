@@ -29,4 +29,8 @@ export default abstract class AbstractODM<T> {
       { ...vehicle } as UpdateQuery<T>,
     );
   }
+
+  public async findByIdAndDelete(id: string) {
+    return this.model.findByIdAndDelete({ _id: id });
+  }
 }
