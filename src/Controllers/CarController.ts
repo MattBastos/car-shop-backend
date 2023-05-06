@@ -6,6 +6,8 @@ export default class CarController {
   private _req: Request;
   private _res: Response;
   private _service: CarService;
+  private _carNotFoundMessage = 'Car not found';
+  private _invalidMongoIdMessage = 'Invalid mongo id';
 
   constructor(req: Request, res: Response) {
     this._req = req;
@@ -39,9 +41,9 @@ export default class CarController {
     const { id } = this._req.params;
     const { message } = await this._service.findById(id);
 
-    if (message === 'Car not found') return this._res.status(404).json({ message });
+    if (message === this._carNotFoundMessage) return this._res.status(404).json({ message });
 
-    if (message === 'Invalid mongo id') return this._res.status(422).json({ message });
+    if (message === this._invalidMongoIdMessage) return this._res.status(422).json({ message });
 
     return this._res.status(200).json(message);
   }
@@ -51,9 +53,18 @@ export default class CarController {
     const { body } = this._req;
     const { message } = await this._service.findByIdAndUpdate(id, body);
 
-    if (message === 'Car not found') return this._res.status(404).json({ message });
+    if (message === this._carNotFoundMessage) return this._res.status(404).json({ message });
 
-    if (message === 'Invalid mongo id') return this._res.status(422).json({ message });
+    if (message === this._invalidMongoIdMessage) return this._res.status(422).json({ message });
+
+    return this._res.status(200).json(message);
+  }
+
+  public async findByIdAndDelete() {
+    const { id } = this._req.params;
+    const { message } = await this._service.findByIdAndDelete(id);
+
+    if (message === this._carNotFoundMessage) return this._res.status(404).json({ message });
 
     return this._res.status(200).json(message);
   }
