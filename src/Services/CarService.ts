@@ -40,4 +40,12 @@ export default class CarService {
     const car = this.createCarDomain(data);
     return { message: car };
   }
+
+  public async findByIdAndDelete(id: string) {
+    const { message } = await this._carDataValidation.validateId(id);
+    if (message) return { message };
+
+    await this._model.findByIdAndDelete(id);
+    return { message: `Car deleted: ${id}` };
+  }
 }
