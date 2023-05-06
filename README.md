@@ -44,7 +44,7 @@ From here you can run the car_shop container via CLI or open it in VS Code.
 Use the command:
 
 ```bash
-  docker exec -it trybers_and_dragons bash
+  docker exec -it car_shop bash
 ```
 
 It will give you access to the interactive terminal of the container created by compose, which is running in the background.
