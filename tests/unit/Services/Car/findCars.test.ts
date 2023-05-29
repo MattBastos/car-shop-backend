@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
-import CarService from '../../../src/Services/CarService';
-import { allCars, carRegistrationOutput } from '../../mocks/carMock.mock';
+import CarService from '../../../../src/Services/CarService';
+import { allCars, carRegistrationOutput } from '../../../mocks/carMock.mock';
 
 describe('Find all cars and find car by Id', function () {
   it('Should return a list with all cars', async function () {
