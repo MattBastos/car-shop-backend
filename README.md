@@ -11,7 +11,7 @@
 - Docker
 - Jest
 - BDD
-- VsCode
+- VSCode
 - Trello
 - Git & Github
 - Linux - Ubuntu
@@ -60,9 +60,9 @@ If you don't want to use docker, just install the dependencies with **npm instal
 Start the Project:
 
 ```bash
-  npm start
+  npm run dev
 ```
-## Autores
+## Author
 
 - [@MattBastos](https://www.github.com/MattBastos)
 
