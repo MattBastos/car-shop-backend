@@ -9,6 +9,7 @@ describe('Delete car by id', function () {
   });
 
   it('Should delete a car successfully', async function () {
+    sinon.stub(Model, 'findOne').resolves();
     sinon.stub(Model, 'findByIdAndDelete').resolves();
     
     const carService = new CarService();
