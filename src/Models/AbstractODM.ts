@@ -31,6 +31,6 @@ export default abstract class AbstractODM<T> {
   }
 
   public async findByIdAndDelete(id: string) {
-    return this.model.findByIdAndDelete({ _id: id });
+    return this.model.findByIdAndDelete(id);
   }
 }
