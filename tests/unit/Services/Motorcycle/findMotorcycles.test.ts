@@ -1,10 +1,14 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
-import MotorcycleService from '../../../src/Services/MotorcycleService';
-import { allMotorcycles, motorcycleRegistrationOutput } from '../../mocks/motorcycleMock.mock';
+import MotorcycleService from '../../../../src/Services/MotorcycleService';
+import { allMotorcycles, motorcycleRegistrationOutput } from '../../../mocks/motorcycleMock.mock';
 
 describe('Find all motorcycles and find motorcycle by Id', function () {
+  afterEach(function () {
+    sinon.restore();
+  });
+
   it('Should return a list with all motorcycles', async function () {
     sinon.stub(Model, 'find').resolves(allMotorcycles);
 

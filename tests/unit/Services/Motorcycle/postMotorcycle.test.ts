@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
-import MotorcycleService from '../../../src/Services/MotorcycleService';
+import MotorcycleService from '../../../../src/Services/MotorcycleService';
 import {
   motorcycleRegistrationInput,
   motorcycleRegistrationOutput,
-} from '../../mocks/motorcycleMock.mock';
+} from '../../../mocks/motorcycleMock.mock';
 
 describe('Motorcycle registration', function () {
   it('Should successfully register a motorcycle', async function () {

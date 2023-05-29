@@ -41,4 +41,12 @@ export default class MotorcycleService {
     const motorcycle = this.createMotorcycleDomain(data);
     return { message: motorcycle };
   }
+
+  public async findByIdAndDelete(id: string) {
+    const { message } = await this._motorcycleDataValidation.validateId(id);
+    if (message) return { message };
+
+    await this._model.findByIdAndDelete(id);
+    return { message: `Motorcycle deleted: ${id}` };
+  }
 }
