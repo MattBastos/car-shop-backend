@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
-import CarService from '../../../src/Services/CarService';
-import { carUpdateInput, carUpdateOutput } from '../../mocks/carMock.mock';
+import CarService from '../../../../src/Services/CarService';
+import { carUpdateInput, carUpdateOutput } from '../../../mocks/carMock.mock';
 
 describe('Update car by id', function () {
   afterEach(function () {

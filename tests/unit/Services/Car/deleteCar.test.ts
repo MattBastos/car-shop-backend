@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
-import CarService from '../../../src/Services/CarService';
+import CarService from '../../../../src/Services/CarService';
 
 describe('Delete car by id', function () {
   afterEach(function () {
@@ -9,6 +9,7 @@ describe('Delete car by id', function () {
   });
 
   it('Should delete a car successfully', async function () {
+    sinon.stub(Model, 'findOne').resolves();
     sinon.stub(Model, 'findByIdAndDelete').resolves();
     
     const carService = new CarService();
