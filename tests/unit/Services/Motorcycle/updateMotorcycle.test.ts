@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
-import MotorcycleService from '../../../src/Services/MotorcycleService';
-import { motorcycleUpdateInput, motorcycleUpdateOutput } from '../../mocks/motorcycleMock.mock';
+import MotorcycleService from '../../../../src/Services/MotorcycleService';
+import { motorcycleUpdateInput, motorcycleUpdateOutput } from '../../../mocks/motorcycleMock.mock';
 
 describe('Update motorcycle by id', function () {
   afterEach(function () {
