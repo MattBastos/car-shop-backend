@@ -1,6 +1,6 @@
 node_modules
 dist
-__tests__
+tests
 nyc.config.js
 .nyc_output
 .vscode
