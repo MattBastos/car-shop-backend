@@ -8,8 +8,8 @@ export default class CarService {
   private carDataValidation = new CarDataValidation();
 
   private createCarDomain(car: ICar | null): Car | null {
-    if (!car) return null;
-    return new Car(car);
+    if (car) return new Car(car);
+    return null;
   }
 
   public async create(car: ICar) {
