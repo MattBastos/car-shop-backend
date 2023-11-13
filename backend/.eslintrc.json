@@ -36,7 +36,7 @@
     "no-console": 1,
     "camelcase": "warn",
     "arrow-parens": [2, "always"],
-    "quotes": [2, "double"],
+    "quotes": [2, "single"],
     "implicit-arrow-linebreak": "off",
     "consistent-return": "off",
     "no-unused-vars": [
