@@ -2,7 +2,7 @@ import { isValidObjectId } from 'mongoose';
 import CarODM from '../../Models/CarODM';
 
 export default class CarDataValidation {
-  private _model = new CarODM();
+  private model = new CarODM();
 
   private validateMongooseId(id: string) {
     if (isValidObjectId(id)) return null;
@@ -10,7 +10,7 @@ export default class CarDataValidation {
   }
 
   private async verifyIdDB(id: string) {
-    const data = await this._model.findById(id);
+    const data = await this.model.findById(id);
 
     if (data) return null;
     return 'Car not found';
