@@ -29,7 +29,8 @@ services:
 
 networks:
   default:
-    name: car_shop_net
+    external:
+      name: car_shop_net
 
 volumes:
   vidly:
