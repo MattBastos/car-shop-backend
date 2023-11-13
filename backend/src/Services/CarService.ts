@@ -48,6 +48,9 @@ export default class CarService {
 
   public async findByIdAndDelete(id: string) {
     const isIdValid = await this.carDataValidation.validateId(id);
-    if (isIdValid) await this.model.findByIdAndDelete(id);
+    if (isIdValid) {
+      await this.model.findByIdAndDelete(id);
+      return { message: `The car with ID ${id} has been successfully deleted` };
+    }
   }
 }

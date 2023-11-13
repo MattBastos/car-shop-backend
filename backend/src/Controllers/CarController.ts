@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import ICar from '../Interfaces/ICar';
 import CarService from '../Services/CarService';
 
+const CAR_NOT_FOUND_MESSAGE = 'Car not found!';
+
 export default class CarController {
   private req: Request;
   private res: Response;
@@ -37,43 +39,29 @@ export default class CarController {
 
   public async findById() {
     const { id } = this.req.params;
-    const { message } = await this.service.findById(id);
+    const car = await this.service.findById(id);
 
-    if (message === this._carNotFoundMessage) {
-      return this.res.status(404).json({ message });
-    }
-
-    if (message === this._invalidMongoIdMessage) {
-      return this.res.status(422).json({ message });
-    }
-
-    return this.res.status(200).json(message);
+    if (car) return this.res.status(200).json(car);
+    return this.res.status(404).json(CAR_NOT_FOUND_MESSAGE);
   }
 
   public async findByIdAndUpdate() {
     const { id } = this.req.params;
     const { body } = this.req;
-    const { message } = await this.service.findByIdAndUpdate(id, body);
+    const car = await this.service.findByIdAndUpdate(id, body);
 
-    if (message === this._carNotFoundMessage) {
-      return this.res.status(404).json({ message });
-    }
-
-    if (message === this._invalidMongoIdMessage) {
-      return this.res.status(422).json({ message });
-    }
-
-    return this.res.status(200).json(message);
+    if (car) return this.res.status(200).json(car);
+    return this.res.status(404).json(CAR_NOT_FOUND_MESSAGE);
   }
 
   public async findByIdAndDelete() {
     const { id } = this.req.params;
-    const { message } = await this.service.findByIdAndDelete(id);
+    const result = await this.service.findByIdAndDelete(id);
 
-    if (message === this._carNotFoundMessage) {
-      return this.res.status(404).json({ message });
+    if (result && result.message) {
+      return this.res.status(200).json(result.message);
     }
 
-    return this.res.status(200).json(message);
+    return this.res.status(404).json(CAR_NOT_FOUND_MESSAGE);
   }
 }
