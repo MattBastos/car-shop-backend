@@ -9,7 +9,7 @@ export default class CarDataValidation {
     return 'Invalid mongo id';
   }
 
-  private async verifyIdDB(id: string) {
+  private async validateDBId(id: string) {
     const data = await this.model.findById(id);
 
     if (data) return null;
@@ -20,7 +20,7 @@ export default class CarDataValidation {
     const isValidId = this.validateMongooseId(id);
     if (isValidId) return { message: isValidId };
 
-    const verifyId = await this.verifyIdDB(id);
+    const verifyId = await this.validateDBId(id);
     if (verifyId) return { message: verifyId };
 
     return { message: null };
