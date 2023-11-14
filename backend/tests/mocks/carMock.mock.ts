@@ -29,7 +29,7 @@ const carRegistrationInput: ICar = {
   year: 2002,
   color: 'Black',
   status: true,
-  buyValue: 15.990,
+  buyValue: 15.99,
   doorsQty: 4,
   seatsQty: 5,
 };
@@ -40,7 +40,7 @@ const carRegistrationOutputData: ICar = {
   year: 2002,
   color: 'Black',
   status: true,
-  buyValue: 15.990,
+  buyValue: 15.99,
   doorsQty: 4,
   seatsQty: 5,
 };
@@ -52,7 +52,7 @@ const carUpdateInput: ICar = {
   year: 1992,
   color: 'Red',
   status: true,
-  buyValue: 12.000,
+  buyValue: 12.0,
   doorsQty: 2,
   seatsQty: 5,
 };
@@ -63,7 +63,7 @@ const carUpdateOutputData: ICar = {
   year: 1992,
   color: 'Red',
   status: true,
-  buyValue: 12.000,
+  buyValue: 12.0,
   doorsQty: 2,
   seatsQty: 5,
 };
