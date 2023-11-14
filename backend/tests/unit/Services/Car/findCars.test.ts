@@ -2,7 +2,13 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
 import CarService from '../../../../src/Services/CarService';
-import { allCars, carRegistrationOutput } from '../../../mocks/carMock.mock';
+import {
+  allCars,
+  carRegistrationOutput,
+  carRegistrationDomain,
+} from '../../../mocks/carMock.mock';
+
+const CAR_NOT_FOUND_MESSAGE = 'Car not found!';
 
 describe('Find all cars and find car by Id', function () {
   afterEach(function () {
@@ -19,33 +25,35 @@ describe('Find all cars and find car by Id', function () {
   });
 
   it('Should return a car by Id', async function () {
-    sinon.stub(Model, 'findById').resolves(carRegistrationOutput);
+    sinon.stub(Model, 'findById').resolves(carRegistrationDomain);
+
+    const carId = carRegistrationOutput.id;
 
     const carService = new CarService();
-    const result = await carService.findById('6348513f34c397abcad040b2');
+    const result = await carService.findById(carId as string);
 
-    expect(result).to.be.deep.equal({ message: carRegistrationOutput });
+    expect(result).to.be.deep.equal(carRegistrationDomain);
   });
 
   it('Should return an exception if the car does not exists', async function () {
-    sinon.stub(Model, 'findById').resolves();
+    sinon.stub(Model, 'findById').rejects(new Error(CAR_NOT_FOUND_MESSAGE));
 
     try {
       const carService = new CarService();
       await carService.findById('634852326b35b59XXXXXX');
     } catch (err) {
-      expect((err as Error).message).to.be.equal({ message: 'Car not found' });
+      expect((err as Error).message).to.be.equal(CAR_NOT_FOUND_MESSAGE);
     }
   });
 
   it('Should return an exception if the id is invalid', async function () {
-    sinon.stub(Model, 'findById').resolves();
+    sinon.stub(Model, 'findById').rejects(new Error(CAR_NOT_FOUND_MESSAGE));
 
     try {
       const carService = new CarService();
       await carService.findById('invalidMongoId');
     } catch (err) {
-      expect((err as Error).message).to.be.equal({ message: 'Invalid mongo id' });
+      expect((err as Error).message).to.be.equal(CAR_NOT_FOUND_MESSAGE);
     }
   });
 });

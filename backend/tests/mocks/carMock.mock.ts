@@ -73,6 +73,7 @@ const carUpdateDomain: Car = new Car(carUpdateOutput);
 export {
   allCars,
   carRegistrationInput,
+  carRegistrationOutput,
   carRegistrationDomain,
   carUpdateInput,
   carUpdateDomain,
