@@ -70,6 +70,9 @@ const carUpdateOutput: ICar = {
 
 const carUpdateDomain: Car = new Car(carUpdateOutput);
 
+const INVALID_MONGOOSE_ID_MESSAGE = { message: 'Invalid Mongo Id!' };
+const CAR_NOT_FOUND_MESSAGE = { message: 'Car not found!' };
+
 export {
   allCars,
   carRegistrationInput,
@@ -77,4 +80,6 @@ export {
   carRegistrationDomain,
   carUpdateInput,
   carUpdateDomain,
+  INVALID_MONGOOSE_ID_MESSAGE,
+  CAR_NOT_FOUND_MESSAGE,
 };

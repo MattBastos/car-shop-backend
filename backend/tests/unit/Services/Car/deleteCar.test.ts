@@ -5,10 +5,9 @@ import CarService from '../../../../src/Services/CarService';
 import {
   carRegistrationOutput,
   carUpdateDomain,
+  INVALID_MONGOOSE_ID_MESSAGE,
+  CAR_NOT_FOUND_MESSAGE,
 } from '../../../mocks/carMock.mock';
-
-const INVALID_MONGOOSE_ID_MESSAGE = { message: 'Invalid Mongo Id!' };
-const CAR_NOT_FOUND_MESSAGE = { message: 'Car not found!' };
 
 describe('Delete car by id', function () {
   afterEach(function () {
