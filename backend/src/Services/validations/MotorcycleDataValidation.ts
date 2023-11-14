@@ -2,26 +2,28 @@ import { isValidObjectId } from 'mongoose';
 import MotorcycleODM from '../../Models/MotorcycleODM';
 
 export default class MotorcycleDataValidation {
-  private _model = new MotorcycleODM();
+  private model = new MotorcycleODM();
 
   private validateMongooseId(id: string) {
     if (isValidObjectId(id)) return null;
-    return 'Invalid mongo id';
+    return 'Invalid Mongo Id!';
   }
 
-  private async verifyIdDB(id: string) {
-    const data = await this._model.findById(id);
+  private async checkForId(id: string) {
+    const data = await this.model.findById(id);
 
     if (data) return null;
-    return 'Motorcycle not found';
+    return 'Motorcycle not found!';
   }
 
   public async validateId(id: string) {
-    const isValidId = this.validateMongooseId(id);
-    if (isValidId) return { message: isValidId };
+    const validateMongooseIdMessage = this.validateMongooseId(id);
+    if (validateMongooseIdMessage) {
+      return { message: validateMongooseIdMessage };
+    }
 
-    const verifyId = await this.verifyIdDB(id);
-    if (verifyId) return { message: verifyId };
+    const checkForIdMessage = await this.checkForId(id);
+    if (checkForIdMessage) return { message: checkForIdMessage };
 
     return { message: null };
   }
