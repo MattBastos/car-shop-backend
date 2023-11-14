@@ -8,7 +8,8 @@ import {
   carRegistrationDomain,
 } from '../../../mocks/carMock.mock';
 
-const CAR_NOT_FOUND_MESSAGE = 'Car not found!';
+const INVALID_MONGOOSE_ID_MESSAGE = { message: 'Invalid Mongo Id!' };
+const CAR_NOT_FOUND_MESSAGE = { message: 'Car not found!' };
 
 describe('Find all cars and find car by Id', function () {
   afterEach(function () {
@@ -32,11 +33,11 @@ describe('Find all cars and find car by Id', function () {
     const carService = new CarService();
     const result = await carService.findById(carId as string);
 
-    expect(result).to.be.deep.equal(carRegistrationDomain);
+    expect(result).to.be.deep.equal({ message: carRegistrationDomain });
   });
 
   it('Should return an exception if the car does not exists', async function () {
-    sinon.stub(Model, 'findById').rejects(new Error(CAR_NOT_FOUND_MESSAGE));
+    sinon.stub(Model, 'findById').resolves(CAR_NOT_FOUND_MESSAGE);
 
     try {
       const invalidCarId = '634852326b35b59XXXXXX';
@@ -48,14 +49,14 @@ describe('Find all cars and find car by Id', function () {
   });
 
   it('Should return an exception if the id is invalid', async function () {
-    sinon.stub(Model, 'findById').rejects(new Error(CAR_NOT_FOUND_MESSAGE));
+    sinon.stub(Model, 'findById').resolves(INVALID_MONGOOSE_ID_MESSAGE);
 
     try {
       const invalidMongoId = 'invalidMongoId';
       const carService = new CarService();
       await carService.findById(invalidMongoId);
     } catch (err) {
-      expect((err as Error).message).to.be.equal(CAR_NOT_FOUND_MESSAGE);
+      expect((err as Error).message).to.be.equal(INVALID_MONGOOSE_ID_MESSAGE);
     }
   });
 });
