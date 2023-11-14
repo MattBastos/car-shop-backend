@@ -25,7 +25,7 @@ describe('Update car by id', function () {
     const carService = new CarService();
     const result = await carService.findByIdAndUpdate(
       carId as string,
-      carUpdateInput
+      carUpdateInput,
     );
 
     expect(result).to.be.deep.equal({
