@@ -2,42 +2,58 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
 import CarService from '../../../../src/Services/CarService';
-import { carUpdateInput, carUpdateOutput } from '../../../mocks/carMock.mock';
+import {
+  carRegistrationOutput,
+  carUpdateInput,
+  carUpdateDomain,
+  INVALID_MONGOOSE_ID_MESSAGE,
+  CAR_NOT_FOUND_MESSAGE,
+} from '../../../mocks/carMock.mock';
 
 describe('Update car by id', function () {
   afterEach(function () {
     sinon.restore();
   });
 
-  it('Should update a car successfully and return its data', async function () {
+  it('Should successfully update a car and return its data', async function () {
+    sinon.stub(Model, 'findById').resolves(carUpdateDomain);
     sinon.stub(Model, 'findByIdAndUpdate').resolves();
-    sinon.stub(Model, 'findById').resolves(carUpdateOutput);
+
+    const carId = carRegistrationOutput.id;
 
     const carService = new CarService();
-    const result = await carService.findByIdAndUpdate('634852326b35b59438fbea2f', carUpdateInput);
+    const result = await carService.findByIdAndUpdate(
+      carId as string,
+      carUpdateInput,
+    );
 
-    expect(result).to.be.deep.equal({ message: carUpdateOutput });
+    expect(result).to.be.deep.equal({
+      message: `The car has been successfully updated: ${carUpdateDomain}`,
+    });
   });
 
   it('Should return an exception if the car does not exists', async function () {
-    sinon.stub(Model, 'findByIdAndUpdate').resolves();
+    sinon.stub(Model, 'findByIdAndUpdate').resolves(CAR_NOT_FOUND_MESSAGE);
 
     try {
+      const invalidCarId = '634852326b35b59438XXXXXX';
       const carService = new CarService();
-      await carService.findByIdAndUpdate('634852326b35b59XXXXXX', carUpdateInput);
+      await carService.findByIdAndUpdate(invalidCarId, carUpdateInput);
     } catch (err) {
-      expect((err as Error).message).to.be.equal({ message: 'Car not found' });
+      expect((err as Error).message).to.be.equal(CAR_NOT_FOUND_MESSAGE);
     }
   });
 
   it('Should return an exception if the id is invalid', async function () {
-    sinon.stub(Model, 'findByIdAndUpdate').resolves();
+    sinon
+      .stub(Model, 'findByIdAndUpdate')
+      .resolves(INVALID_MONGOOSE_ID_MESSAGE);
 
     try {
       const carService = new CarService();
       await carService.findByIdAndUpdate('invalidMongoId', carUpdateInput);
     } catch (err) {
-      expect((err as Error).message).to.be.equal({ message: 'Invalid mongo id' });
+      expect((err as Error).message).to.be.equal(INVALID_MONGOOSE_ID_MESSAGE);
     }
   });
 });

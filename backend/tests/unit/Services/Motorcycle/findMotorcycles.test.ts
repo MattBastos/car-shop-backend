@@ -2,7 +2,13 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
 import MotorcycleService from '../../../../src/Services/MotorcycleService';
-import { allMotorcycles, motorcycleRegistrationOutput } from '../../../mocks/motorcycleMock.mock';
+import {
+  allMotorcycles,
+  motorcycleDomain,
+  motorcycleUpdateOutput,
+  MOTORCYCLE_NOT_FOUND_MESSAGE,
+  INVALID_MONGOOSE_ID_MESSAGE,
+} from '../../../mocks/motorcycleMock.mock';
 
 describe('Find all motorcycles and find motorcycle by Id', function () {
   afterEach(function () {
@@ -19,22 +25,25 @@ describe('Find all motorcycles and find motorcycle by Id', function () {
   });
 
   it('Should return a motorcycle by Id', async function () {
-    sinon.stub(Model, 'findById').resolves(motorcycleRegistrationOutput);
+    sinon.stub(Model, 'findById').resolves(motorcycleDomain);
+
+    const motorcycleId = motorcycleUpdateOutput.id;
 
     const motorcycleService = new MotorcycleService();
-    const result = await motorcycleService.findById('6348513f34c397abcad040b2');
+    const result = await motorcycleService.findById(motorcycleId as string);
 
-    expect(result).to.be.deep.equal({ message: motorcycleRegistrationOutput });
+    expect(result).to.be.deep.equal({ message: motorcycleDomain });
   });
 
   it('Should return an exception if the motorcycle does not exists', async function () {
     sinon.stub(Model, 'findById').resolves();
 
     try {
+      const invalidMotorcycleId = '6348513f34c397abXXXXX';
       const motorcycleService = new MotorcycleService();
-      await motorcycleService.findById('6348513f34c397abXXXXX');
+      await motorcycleService.findById(invalidMotorcycleId);
     } catch (err) {
-      expect((err as Error).message).to.be.equal({ message: 'Motorcycle not found' });
+      expect((err as Error).message).to.be.equal(MOTORCYCLE_NOT_FOUND_MESSAGE);
     }
   });
 
@@ -42,10 +51,11 @@ describe('Find all motorcycles and find motorcycle by Id', function () {
     sinon.stub(Model, 'findById').resolves();
 
     try {
+      const invalidMongoId = 'invalidMongoId';
       const motorcycleService = new MotorcycleService();
-      await motorcycleService.findById('invalidMongoId');
+      await motorcycleService.findById(invalidMongoId);
     } catch (err) {
-      expect((err as Error).message).to.be.equal({ message: 'Invalid mongo id' });
+      expect((err as Error).message).to.be.equal(INVALID_MONGOOSE_ID_MESSAGE);
     }
   });
 });

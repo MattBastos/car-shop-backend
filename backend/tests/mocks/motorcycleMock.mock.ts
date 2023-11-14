@@ -10,7 +10,7 @@ const allMotorcycles: IMotorcycle[] = [
     year: 2005,
     color: 'Yellow',
     status: true,
-    buyValue: 30.000,
+    buyValue: 30.0,
     category: 'Street',
     engineCapacity: 600,
   },
@@ -20,41 +20,43 @@ const allMotorcycles: IMotorcycle[] = [
     year: 2011,
     color: 'Orange',
     status: true,
-    buyValue: 59.900,
+    buyValue: 59.9,
     category: 'Street',
     engineCapacity: 1000,
   },
 ];
 
-const motorcycleRegistrationInput: IMotorcycle = { 
+const motorcycleRegistrationInput: IMotorcycle = {
   model: HORNET,
   year: 2005,
   color: 'Yellow',
   status: true,
-  buyValue: 30.000,
+  buyValue: 30.0,
   category: 'Street',
   engineCapacity: 600,
 };
 
-const motorcycleRegistrationOutputData: IMotorcycle = {
+const motorcycleRegistrationOutput: IMotorcycle = {
   id: '6348513f34c397abcad040b2',
   model: HORNET,
   year: 2005,
   color: 'Yellow',
   status: true,
-  buyValue: 30.000,
+  buyValue: 30.0,
   category: 'Street',
   engineCapacity: 600,
 };
 
-const motorcycleRegistrationOutput: Motorcycle = new Motorcycle(motorcycleRegistrationOutputData);
+const motorcycleDomain: Motorcycle = new Motorcycle(
+  motorcycleRegistrationOutput,
+);
 
 const motorcycleUpdateInput: IMotorcycle = {
   model: HORNET,
   year: 2014,
   color: 'Red',
   status: true,
-  buyValue: 45.000,
+  buyValue: 45.0,
   category: 'Street',
   engineCapacity: 600,
 };
@@ -65,15 +67,20 @@ const motorcycleUpdateOutput: IMotorcycle = {
   year: 2014,
   color: 'Red',
   status: true,
-  buyValue: 45.000,
+  buyValue: 45.0,
   category: 'Street',
   engineCapacity: 600,
 };
 
+const INVALID_MONGOOSE_ID_MESSAGE = { message: 'Invalid Mongo Id!' };
+const MOTORCYCLE_NOT_FOUND_MESSAGE = { message: 'Motorcycle not found!' };
+
 export {
   allMotorcycles,
   motorcycleRegistrationInput,
-  motorcycleRegistrationOutput,
+  motorcycleDomain,
   motorcycleUpdateInput,
   motorcycleUpdateOutput,
+  INVALID_MONGOOSE_ID_MESSAGE,
+  MOTORCYCLE_NOT_FOUND_MESSAGE,
 };

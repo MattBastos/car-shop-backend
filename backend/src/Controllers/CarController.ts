@@ -2,21 +2,22 @@ import { Request, Response } from 'express';
 import ICar from '../Interfaces/ICar';
 import CarService from '../Services/CarService';
 
+const INVALID_MONGOOSE_ID_MESSAGE = 'Invalid Mongo Id!';
+const CAR_NOT_FOUND_MESSAGE = 'Car not found!';
+
 export default class CarController {
-  private _req: Request;
-  private _res: Response;
-  private _service: CarService;
-  private _carNotFoundMessage = 'Car not found';
-  private _invalidMongoIdMessage = 'Invalid mongo id';
+  private req: Request;
+  private res: Response;
+  private service: CarService;
 
   constructor(req: Request, res: Response) {
-    this._req = req;
-    this._res = res;
-    this._service = new CarService();
+    this.req = req;
+    this.res = res;
+    this.service = new CarService();
   }
 
   public async create() {
-    const { body } = this._req;
+    const { body } = this.req;
 
     const car: ICar = {
       model: body.model,
@@ -28,44 +29,58 @@ export default class CarController {
       seatsQty: body.seatsQty,
     };
 
-    const newCar = await this._service.create(car);
-    return this._res.status(201).json(newCar);
+    const newCar = await this.service.create(car);
+    return this.res.status(201).json(newCar);
   }
 
   public async find() {
-    const allCars = await this._service.find();
-    return this._res.status(200).json(allCars);
+    const allCars = await this.service.find();
+    return this.res.status(200).json(allCars);
   }
 
   public async findById() {
-    const { id } = this._req.params;
-    const { message } = await this._service.findById(id);
+    const { id } = this.req.params;
+    const { message } = await this.service.findById(id);
 
-    if (message === this._carNotFoundMessage) return this._res.status(404).json({ message });
+    if (message === CAR_NOT_FOUND_MESSAGE) {
+      return this.res.status(404).json(message);
+    }
 
-    if (message === this._invalidMongoIdMessage) return this._res.status(422).json({ message });
+    if (message === INVALID_MONGOOSE_ID_MESSAGE) {
+      return this.res.status(422).json(message);
+    }
 
-    return this._res.status(200).json(message);
+    return this.res.status(200).json(message);
   }
 
   public async findByIdAndUpdate() {
-    const { id } = this._req.params;
-    const { body } = this._req;
-    const { message } = await this._service.findByIdAndUpdate(id, body);
+    const { id } = this.req.params;
+    const { body } = this.req;
+    const { message } = await this.service.findByIdAndUpdate(id, body);
 
-    if (message === this._carNotFoundMessage) return this._res.status(404).json({ message });
+    if (message === CAR_NOT_FOUND_MESSAGE) {
+      return this.res.status(404).json(message);
+    }
 
-    if (message === this._invalidMongoIdMessage) return this._res.status(422).json({ message });
+    if (message === INVALID_MONGOOSE_ID_MESSAGE) {
+      return this.res.status(422).json(message);
+    }
 
-    return this._res.status(200).json(message);
+    return this.res.status(200).json(message);
   }
 
   public async findByIdAndDelete() {
-    const { id } = this._req.params;
-    const { message } = await this._service.findByIdAndDelete(id);
+    const { id } = this.req.params;
+    const { message } = await this.service.findByIdAndDelete(id);
 
-    if (message === this._carNotFoundMessage) return this._res.status(404).json({ message });
+    if (message === CAR_NOT_FOUND_MESSAGE) {
+      return this.res.status(404).json(message);
+    }
 
-    return this._res.status(200).json(message);
+    if (message === INVALID_MONGOOSE_ID_MESSAGE) {
+      return this.res.status(422).json(message);
+    }
+
+    return this.res.status(200).json(message);
   }
 }

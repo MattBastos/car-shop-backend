@@ -2,7 +2,13 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
 import MotorcycleService from '../../../../src/Services/MotorcycleService';
-import { motorcycleUpdateInput, motorcycleUpdateOutput } from '../../../mocks/motorcycleMock.mock';
+import {
+  motorcycleUpdateInput,
+  motorcycleDomain,
+  motorcycleUpdateOutput,
+  INVALID_MONGOOSE_ID_MESSAGE,
+  MOTORCYCLE_NOT_FOUND_MESSAGE,
+} from '../../../mocks/motorcycleMock.mock';
 
 describe('Update motorcycle by id', function () {
   afterEach(function () {
@@ -11,28 +17,33 @@ describe('Update motorcycle by id', function () {
 
   it('Should update a motorcycle successfully and return its data', async function () {
     sinon.stub(Model, 'findByIdAndUpdate').resolves();
-    sinon.stub(Model, 'findById').resolves(motorcycleUpdateOutput);
+    sinon.stub(Model, 'findById').resolves(motorcycleDomain);
+
+    const motorcycleId = motorcycleUpdateOutput.id;
 
     const motorcycleService = new MotorcycleService();
     const result = await motorcycleService.findByIdAndUpdate(
-      '634852326b35b59438fbea2f',
+      motorcycleId as string,
       motorcycleUpdateInput,
     );
 
-    expect(result).to.be.deep.equal({ message: motorcycleUpdateOutput });
+    expect(result).to.be.deep.equal({
+      message: `The motorcycle has been successfully updated: ${motorcycleDomain}`,
+    });
   });
 
   it('Should return an exception if the motorcycle does not exists', async function () {
     sinon.stub(Model, 'findByIdAndUpdate').resolves();
 
     try {
+      const invalidMotorcycleId = '634852326b35b59XXXXXXX';
       const motorcycleService = new MotorcycleService();
       await motorcycleService.findByIdAndUpdate(
-        '634852326b35b59XXXXXXX',
+        invalidMotorcycleId,
         motorcycleUpdateInput,
       );
     } catch (err) {
-      expect((err as Error).message).to.be.equal({ message: 'Motorcycle not found' });
+      expect((err as Error).message).to.be.equal(MOTORCYCLE_NOT_FOUND_MESSAGE);
     }
   });
 
@@ -40,13 +51,14 @@ describe('Update motorcycle by id', function () {
     sinon.stub(Model, 'findByIdAndUpdate').resolves();
 
     try {
+      const invalidMongoId = 'invalidMongoId';
       const motorcycleService = new MotorcycleService();
       await motorcycleService.findByIdAndUpdate(
-        '634852326b35b59XXXXXXX',
+        invalidMongoId,
         motorcycleUpdateInput,
       );
     } catch (err) {
-      expect((err as Error).message).to.be.equal({ message: 'Invalid mongo id' });
+      expect((err as Error).message).to.be.equal(INVALID_MONGOOSE_ID_MESSAGE);
     }
   });
 });
