@@ -39,8 +39,9 @@ describe('Find all cars and find car by Id', function () {
     sinon.stub(Model, 'findById').rejects(new Error(CAR_NOT_FOUND_MESSAGE));
 
     try {
+      const invalidCarId = '634852326b35b59XXXXXX';
       const carService = new CarService();
-      await carService.findById('634852326b35b59XXXXXX');
+      await carService.findById(invalidCarId);
     } catch (err) {
       expect((err as Error).message).to.be.equal(CAR_NOT_FOUND_MESSAGE);
     }
@@ -50,8 +51,9 @@ describe('Find all cars and find car by Id', function () {
     sinon.stub(Model, 'findById').rejects(new Error(CAR_NOT_FOUND_MESSAGE));
 
     try {
+      const invalidMongoId = 'invalidMongoId';
       const carService = new CarService();
-      await carService.findById('invalidMongoId');
+      await carService.findById(invalidMongoId);
     } catch (err) {
       expect((err as Error).message).to.be.equal(CAR_NOT_FOUND_MESSAGE);
     }
