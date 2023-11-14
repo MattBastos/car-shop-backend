@@ -73,7 +73,7 @@ const motorcycleUpdateOutput: IMotorcycle = {
 };
 
 const INVALID_MONGOOSE_ID_MESSAGE = { message: 'Invalid Mongo Id!' };
-const MOTORCYCLE_NOT_FOUND_MESSAGE = { message: 'Car not found!' };
+const MOTORCYCLE_NOT_FOUND_MESSAGE = { message: 'Motorcycle not found!' };
 
 export {
   allMotorcycles,
