@@ -4,19 +4,15 @@ import CarODM from '../../Models/CarODM';
 export default class CarDataValidation {
   private model = new CarODM();
 
-  private validateMongooseId(id: string): boolean {
-    return isValidObjectId(id);
+  public validateMongooseId(id: string) {
+    if (isValidObjectId(id)) return null;
+    return 'Invalid Mongo Id!';
   }
 
-  private async validateDatabaseId(id: string): Promise<boolean> {
+  public async checkForId(id: string) {
     const data = await this.model.findById(id);
-    return !!data;
-  }
 
-  public async validateId(id: string): Promise<boolean> {
-    const isValidMongooseId = this.validateMongooseId(id);
-    const isValidDatabaseId = await this.validateDatabaseId(id);
-
-    return isValidMongooseId && isValidDatabaseId;
+    if (data) return null;
+    return 'Car not found!';
   }
 }
