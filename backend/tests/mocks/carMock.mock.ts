@@ -34,7 +34,7 @@ const carRegistrationInput: ICar = {
   seatsQty: 5,
 };
 
-const carRegistrationOutputData: ICar = {
+const carRegistrationOutput: ICar = {
   id: '6348513f34c397abcad040b2',
   model: 'Marea',
   year: 2002,
@@ -45,7 +45,7 @@ const carRegistrationOutputData: ICar = {
   seatsQty: 5,
 };
 
-const carRegistrationOutput: Car = new Car(carRegistrationOutputData);
+const carRegistrationDomain: Car = new Car(carRegistrationOutput);
 
 const carUpdateInput: ICar = {
   model: 'Marea',
@@ -57,7 +57,7 @@ const carUpdateInput: ICar = {
   seatsQty: 5,
 };
 
-const carUpdateOutputData: ICar = {
+const carUpdateOutput: ICar = {
   id: '634852326b35b59438fbea2f',
   model: 'Marea',
   year: 1992,
@@ -68,12 +68,12 @@ const carUpdateOutputData: ICar = {
   seatsQty: 5,
 };
 
-const carUpdateOutput: Car = new Car(carUpdateOutputData);
+const carUpdateDomain: Car = new Car(carUpdateOutput);
 
 export {
   allCars,
   carRegistrationInput,
-  carRegistrationOutput,
+  carRegistrationDomain,
   carUpdateInput,
-  carUpdateOutput,
+  carUpdateDomain,
 };
