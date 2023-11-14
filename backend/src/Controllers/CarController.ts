@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import ICar from '../Interfaces/ICar';
 import CarService from '../Services/CarService';
 
+const INVALID_MONGOOSE_ID_MESSAGE = 'Invalid Mongo Id!';
 const CAR_NOT_FOUND_MESSAGE = 'Car not found!';
 
 export default class CarController {
@@ -39,29 +40,47 @@ export default class CarController {
 
   public async findById() {
     const { id } = this.req.params;
-    const car = await this.service.findById(id);
+    const { message } = await this.service.findById(id);
 
-    if (car) return this.res.status(200).json(car);
-    return this.res.status(404).json(CAR_NOT_FOUND_MESSAGE);
+    if (message === CAR_NOT_FOUND_MESSAGE) {
+      return this.res.status(404).json(message);
+    }
+
+    if (message === INVALID_MONGOOSE_ID_MESSAGE) {
+      return this.res.status(422).json(message);
+    }
+
+    return this.res.status(200).json(message);
   }
 
   public async findByIdAndUpdate() {
     const { id } = this.req.params;
     const { body } = this.req;
-    const car = await this.service.findByIdAndUpdate(id, body);
+    const { message } = await this.service.findByIdAndUpdate(id, body);
 
-    if (car) return this.res.status(200).json(car);
-    return this.res.status(404).json(CAR_NOT_FOUND_MESSAGE);
+    if (message === CAR_NOT_FOUND_MESSAGE) {
+      return this.res.status(404).json(message);
+    }
+
+    if (message === INVALID_MONGOOSE_ID_MESSAGE) {
+      return this.res.status(422).json(message);
+    }
+
+    return this.res.status(200).json(message);
   }
 
   public async findByIdAndDelete() {
     const { id } = this.req.params;
-    const result = await this.service.findByIdAndDelete(id);
+    const { message } = await this.service.findByIdAndDelete(id);
 
-    if (result && result.message) {
-      return this.res.status(200).json(result.message);
+    if (message === CAR_NOT_FOUND_MESSAGE) {
+      return this.res.status(404).json(message);
     }
 
-    return this.res.status(404).json(CAR_NOT_FOUND_MESSAGE);
+    if (message === INVALID_MONGOOSE_ID_MESSAGE) {
+      return this.res.status(422).json(message);
+    }
+
+    return this.res.status(200).json(message);
   }
 }

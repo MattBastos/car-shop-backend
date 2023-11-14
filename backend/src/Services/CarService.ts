@@ -28,7 +28,7 @@ export default class CarService {
 
   public async findById(id: string) {
     const { message } = await this.carDataValidation.validateId(id);
-    if (message) return message;
+    if (message) return { message };
 
     const data = await this.model.findById(id);
     const car = this.createCarDomain(data);
@@ -37,7 +37,7 @@ export default class CarService {
 
   public async findByIdAndUpdate(id: string, carData: ICar) {
     const { message } = await this.carDataValidation.validateId(id);
-    if (message) return message;
+    if (message) return { message };
 
     await this.model.findByIdAndUpdate(id, carData);
 
@@ -48,7 +48,7 @@ export default class CarService {
 
   public async findByIdAndDelete(id: string) {
     const { message } = await this.carDataValidation.validateId(id);
-    if (message) return message;
+    if (message) return { message };
 
     await this.model.findByIdAndDelete(id);
     return { message: `The car with ID ${id} has been successfully deleted` };
