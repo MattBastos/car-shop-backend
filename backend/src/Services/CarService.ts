@@ -27,34 +27,30 @@ export default class CarService {
   }
 
   public async findById(id: string) {
-    const isIdValid = await this.carDataValidation.validateId(id);
+    const { message } = await this.carDataValidation.validateId(id);
+    if (message) return message;
 
-    if (isIdValid) {
-      const data = await this.model.findById(id);
-      const car = this.createCarDomain(data);
-
-      return car;
-    }
+    const data = await this.model.findById(id);
+    const car = this.createCarDomain(data);
+    return { message: car };
   }
 
   public async findByIdAndUpdate(id: string, carData: ICar) {
-    const isIdValid = await this.carDataValidation.validateId(id);
+    const { message } = await this.carDataValidation.validateId(id);
+    if (message) return message;
 
-    if (isIdValid) {
-      await this.model.findByIdAndUpdate(id, carData);
+    await this.model.findByIdAndUpdate(id, carData);
 
-      const data = await this.model.findById(id);
-      const car = this.createCarDomain(data);
-
-      return car;
-    }
+    const data = await this.model.findById(id);
+    const car = this.createCarDomain(data);
+    return { message: `The car has been successfully updated: ${car}` };
   }
 
   public async findByIdAndDelete(id: string) {
-    const isIdValid = await this.carDataValidation.validateId(id);
-    if (isIdValid) {
-      await this.model.findByIdAndDelete(id);
-      return { message: `The car with ID ${id} has been successfully deleted` };
-    }
+    const { message } = await this.carDataValidation.validateId(id);
+    if (message) return message;
+
+    await this.model.findByIdAndDelete(id);
+    return { message: `The car with ID ${id} has been successfully deleted` };
   }
 }

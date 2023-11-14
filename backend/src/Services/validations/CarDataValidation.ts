@@ -15,4 +15,16 @@ export default class CarDataValidation {
     if (data) return null;
     return 'Car not found!';
   }
+
+  public async validateId(id: string) {
+    const validateMongooseIdMessage = this.validateMongooseId(id);
+    if (validateMongooseIdMessage) {
+      return { message: validateMongooseIdMessage };
+    }
+
+    const checkForIdMessage = await this.checkForId(id);
+    if (checkForIdMessage) return { message: checkForIdMessage };
+
+    return { message: null };
+  }
 }
