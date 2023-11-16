@@ -62,11 +62,110 @@ Start the Project:
 ```bash
   npm run dev
 ```
+
+## Car Shop API
+
+### Overview
+
+The Car Shop API provides endpoints to manage information about cars and motorcycles.
+
+### Base URL
+
+```
+  http://localhost:3001/cars/
+  http://localhost:3001/motorcycles/
+```
+
+### Create Vehicle
+
+**Endpoint:** /cars | /motorcycles
+**Method:** POST
+**Description:** Create a new vehicle entry.
+
+**Request Car Endpoint Body Example:**
+
+```json
+{
+  "model": "Example Model",
+  "year": 2023,
+  "color": "Black",
+  "status": true,
+  "buyValue": 25000.0,
+  "doorsQty": 4,
+  "seatsQty": 5
+}
+```
+
+**Request Motorcycle Endpoint Body Example:**
+
+```json
+{
+  "model": "Example Model",
+  "year": 2023,
+  "color": "Black",
+  "status": true,
+  "buyValue": 25000.0,
+  "category": "Street",
+  "engineCapacity": 600
+}
+```
+
+### Get All Vehicles
+
+**Endpoint:** /cars | /motorcycles
+**Method:** GET
+**Description:** Retrieve a list of all cars/motorcycles.
+
+### Get Vehicle by ID
+
+**Endpoint:** /cars/:id | /motorcycles/:id
+**Method:** GET
+**Description:** Retrieve details of a specific vehicle by ID.
+
+### Update Vehicle by ID
+
+**Endpoint:** /cars/:id | /motorcycles/:id
+**Method:** PUT
+**Description:** Update details of a specific vehicle by ID.
+
+**Request Car Endpoint Body Example:**
+
+```json
+{
+  "model": "Example Model",
+  "year": 2023,
+  "color": "Black",
+  "status": true,
+  "buyValue": 25000.0,
+  "doorsQty": 4,
+  "seatsQty": 5
+}
+```
+
+**Request Motorcycle Endpoint Body Example:**
+
+```json
+{
+  "model": "Example Model",
+  "year": 2023,
+  "color": "Black",
+  "status": true,
+  "buyValue": 25000.0,
+  "category": "Street",
+  "engineCapacity": 600
+}
+```
+
+### Delete Vehicle by ID
+
+**Endpoint:** /cars/:id | /motorcycles/:id
+**Method:** DELETE
+**Description:** Delete a specific vehicle by ID.
+
 ## Author
 
 - [@MattBastos](https://www.github.com/MattBastos)
 
-
 ## Reference
 
- - [Trybe](https://www.betrybe.com/)
+- [Trybe](https://www.betrybe.com/)
