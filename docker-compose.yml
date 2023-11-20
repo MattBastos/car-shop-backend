@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   backend:
@@ -26,6 +26,23 @@ services:
     restart: always
     volumes:
       - vidly:/data/db
+
+  frontend:
+    depends_on:
+      - backend
+    build: ./frontend
+    container_name: car_shop_front
+    ports:
+      - 3000:3000
+    restart: always
+    tty: true
+    stdin_open: true
+    command: bash
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:3001
 
 networks:
   default:
