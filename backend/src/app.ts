@@ -5,7 +5,7 @@ import motorcycleRoutes from './Routes/motorcycleRoutes';
 
 const app = express();
 
-app.use(cors);
+app.use(cors());
 app.use(express.json());
 app.use('/cars', carRoutes);
 app.use('/motorcycles', motorcycleRoutes);
