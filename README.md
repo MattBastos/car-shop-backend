@@ -21,7 +21,7 @@
 Clone the project:
 
 ```bash
-  git@github.com:MattBastos/car-shop.git
+  git@github.com:MattBastos/car-shop-backend.git
 ```
 
 Enter the project directory:
