@@ -1,4 +1,4 @@
-# Car Shop
+# Car Shop Backend
 
 - For this project, i applied Object Oriented Programming (OOP) principles to build a CRUD API to manage a concessionary. This was done using the MongoDB database through the Mongoose framework.
 
